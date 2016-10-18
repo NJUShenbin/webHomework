@@ -11,7 +11,7 @@ function HealthValueChart({value}) {
 
   const option = {
     tooltip : {
-      formatter: "{a} <br/>{b} : {c}%"
+      formatter: "{a} {b} : {c}"
     },
     // toolbox: {
     //   feature: {
@@ -21,7 +21,7 @@ function HealthValueChart({value}) {
     // },
     series: [
       {
-        name: '',
+        name: 'BMI指数',
         type: 'gauge',
         min:10,
         max:30,
