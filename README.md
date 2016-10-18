@@ -8,4 +8,4 @@
  3. [dvajs](https://github.com/dvajs/dva),前端框架,对redux,react router,webpack的封装
  4. [material-ui](http://www.material-ui.com/),react组件库,对[google material design](https://material.google.com/)的实现
  5. [Flexbox Grid](http://flexboxgrid.com/),css栅格布局库
- 6. [echarts](http://echarts.baidu.com/),javascript图表库以及[echarts-for-react](https://github.com/hustcc/echarts-for-react)封装它的react库.
+ 6. [echarts](http://echarts.baidu.com/),javascript图表库以及封装它的react库[echarts-for-react](https://github.com/hustcc/echarts-for-react).
