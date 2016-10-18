@@ -1,8 +1,8 @@
-# webHomeworkFrontEnd
+# web大作业前端
 
 ---
 
-这是我在南大软院`面向web的计算`中完成大作业的前段部分,主要需求是做一个运动信息展示和用户社交的小项目.用到的主要技术有:
+这是我在南大软院`面向web的计算`中完成大作业的前段部分,主要需求是做一个运动信息展示和用户社交的小项目,类似于[咕咚](http://www.codoon.com/).用到的主要技术有:
  1. [react](https://facebook.github.io/react/),前端组件化框架,MVC的V
  2. [ES6](http://es6.ruanyifeng.com/),ECMAScript 6语法
  3. [dvajs](https://github.com/dvajs/dva),前端框架,对redux,react router,webpack的封装
