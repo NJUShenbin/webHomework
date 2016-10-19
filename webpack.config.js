@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = function(webpackConfig, env) {
+
   webpackConfig.babel.plugins.push('transform-runtime');
 
   // Support hmr
@@ -36,6 +38,8 @@ module.exports = function(webpackConfig, env) {
       loader.test = /\.css$/;
     }
   });
+
+  webpackConfig.plugins.push(new OpenBrowserPlugin({ url: 'http://localhost:8989' }));
 
   return webpackConfig;
 };

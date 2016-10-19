@@ -68,7 +68,7 @@ function SportGoalChart({totalDay=7,achieveDay},context) {
 SportGoalChart.propTypes={
   totalDay: PropTypes.number,
   achieveDay: PropTypes.number.isRequired
-}
+};
 
 SportGoalChart.contextTypes = {muiTheme: React.PropTypes.object};
 

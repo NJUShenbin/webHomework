@@ -15,23 +15,28 @@ import {List,ListItem} from 'material-ui/List'
 import SportGoalChart from '../components/SportGoalChart'
 import SleepGoalChart from '../components/SleepGoalChart'
 import HealthValueChart from '../components/HealthValueChart'
-import getAvatarSrc from '../services/AvatarService'
+import SleepLineChart from '../components/SleepLineChart'
+import SportHeatChart from '../components/SportHeatChart'
 
+
+import getAvatarSrc from '../services/AvatarService'
 
 
 
 const avatarStyle = {
   display:'block',
   marginLeft: 'auto',
-  marginRight: 'auto'
-}
+  marginRight: 'auto',
+  marginTop:'10px',
+  marginBottom:'10px'
+};
 const iconSize = 100;
 
 function HomePage({children,location}) {
   return(
     <div className={homePageStyle.homePage+" row"}>
       <div className="col-lg-4 col-xs-12">
-        <Paper style={{marginBottom:'20px'}}>
+        <Paper className={homePageStyle.paper}>
           <Avatar style={avatarStyle} src={getAvatarSrc()} size={200}/>
           <span className={homePageStyle.username}> Njushenbin </span>
           <Divider style={{marginTop:'10px'}}/>
@@ -43,8 +48,8 @@ function HomePage({children,location}) {
       </div>
 
       <div className={homePageStyle.alignLeft+" col-lg-8 col-xs-12"}>
-        <Paper style={{marginBottom:'10px'}}>
-          <h1 style={{paddingLeft:'20px'}}>自从加入扑通以来</h1>
+        <Paper className={homePageStyle.paper}>
+          <h1>自从加入扑通以来</h1>
           <div className="row around-xs" style={{textAlign:'center'}}>
             <div className="col-lg-3" >
               <Avatar style={avatarStyle} backgroundColor={RunIconBackground} icon={<Run/>} size={iconSize}/>
@@ -61,8 +66,8 @@ function HomePage({children,location}) {
           </div>
         </Paper>
 
-        <Paper>
-          <h1 style={{paddingLeft:'20px'}}>你本周的健康情况</h1>
+        <Paper className={homePageStyle.paper}>
+          <h1>你本周的健康情况</h1>
           <div className="row around-xs" style={{textAlign:'center'}}>
             <div className="col-lg-3  col-xs-12" >
               <SportGoalChart achieveDay={5}/>
@@ -79,6 +84,17 @@ function HomePage({children,location}) {
 
           </div>
         </Paper>
+
+        <Paper className={homePageStyle.paper}>
+          <h1>你的睡眠情况</h1>
+          <SleepLineChart/>
+        </Paper>
+
+        <Paper className={homePageStyle.paper}>
+          <h1>你的运动强度</h1>
+          <SportHeatChart/>
+        </Paper>
+
       </div>
     </div>
   );

@@ -23,6 +23,7 @@
     "dora-plugin-webpack": "0.6.x",
     "dora-plugin-webpack-hmr": "^0.1.0",
     "expect": "^1.20.2",
+    "open-browser-webpack-plugin": "0.0.2",
     "redbox-react": "^1.2.10"
   },
   "scripts": {

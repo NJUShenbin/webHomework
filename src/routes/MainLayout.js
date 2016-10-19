@@ -13,6 +13,7 @@ import {teal300 as primary1Color,
         }from 'material-ui/styles/colors';
 
 import getAvatarSrc from '../services/AvatarService'
+import mainLayoutStyle from './MainLayout.less'
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -73,15 +74,16 @@ function MainLayout({location,children}) {
       <div >
         <AppBar
           title="扑通"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
           iconElementRight={navButtons}
         />
-        <div className="row center-xs">
+        <div className={mainLayoutStyle.mainContainer+" row center-xs"}>
           <div className="col-sm-10 col-lg-8">
             {children}
           </div>
+
         </div>
       </div>
+
 
     </MuiThemeProvider>
   )
