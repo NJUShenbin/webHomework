@@ -59,8 +59,10 @@ function MainLayout({location,children}) {
 
   const navButtons = (
     <div style={navStyle}>
-      <FlatButton label="竞赛" labelStyle={lableStyle}></FlatButton>
-      <FlatButton label="动态" labelStyle={lableStyle} style={{paddingRight:'10px'}}></FlatButton>
+      <FlatButton
+        containerElement={<Link to="/competition"/>}
+        label="竞赛" labelStyle={lableStyle}/>
+      <FlatButton label="动态" labelStyle={lableStyle} style={{paddingRight:'10px'}} />
 
       <Avatar src={getAvatarSrc()}/>
       <FlatButton containerElement={<Link to="/" />}
@@ -80,7 +82,7 @@ function MainLayout({location,children}) {
           iconElementRight={navButtons}
         />
         <div className={mainLayoutStyle.mainContainer+" row center-xs"}>
-          <div className="col-sm-10 col-lg-8">
+          <div className={mainLayoutStyle.notAlignCenter+" col-sm-10 col-lg-8"}>
             {children}
           </div>
 
