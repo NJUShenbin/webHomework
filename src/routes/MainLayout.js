@@ -1,4 +1,6 @@
 import React, {PropTypes} from "react"
+import { Link } from 'dva/router';
+
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -61,7 +63,8 @@ function MainLayout({location,children}) {
       <FlatButton label="动态" labelStyle={lableStyle} style={{paddingRight:'10px'}}></FlatButton>
 
       <Avatar src={getAvatarSrc()}/>
-      <FlatButton label="Njushenbin"
+      <FlatButton containerElement={<Link to="/" />}
+                  label="Njushenbin"
                   labelStyle={{textTransform:'none',...lableStyle,fontSize:lableStyle.fontSize-2,paddingLeft:'5px'}}>
 
       </FlatButton>
