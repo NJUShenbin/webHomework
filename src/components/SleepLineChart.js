@@ -67,7 +67,7 @@ function SleepLineChart({ sleep }) {
       },
     ],
 
-    color: ['#00897B','#4DB6AC']
+    color: ['#FBC02D','#FFEE58']
   };
 
   return(

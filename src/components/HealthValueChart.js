@@ -27,8 +27,8 @@ function HealthValueChart({value}) {
         max:30,
         axisLine: {            // 坐标轴线
           lineStyle: {       // 属性lineStyle控制线条样式
-            color:[[computeRate(18.5), '#00ACC1' ],
-              [computeRate(23.9), '#91c7ae'],
+            color:[[computeRate(18.5), '#B2DFDB' ],
+              [computeRate(23.9), '#AED581'],
               [computeRate(27.9), 'rgb(233,143,111)'],
               [1,'#c23531']],
             width: 10

@@ -59,7 +59,7 @@ function SportHeatChart() {
       left: 'center',
       bottom: '15%',
       inRange: {
-        color: ['#C5E1A5', '#33691E']
+        color: ['#FFCC80', '#EF6C00']
       }
     },
     series: [{

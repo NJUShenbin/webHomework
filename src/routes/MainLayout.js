@@ -9,38 +9,13 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper'
 import Avatar from 'material-ui/Avatar'
 import Flex from 'flexboxgrid'
-import {teal300 as primary1Color,
-        teal500 as primary2Color,
-        lightGreen500 as accent1Color,
-        }from 'material-ui/styles/colors';
 
 import getAvatarSrc from '../services/AvatarService'
 import mainLayoutStyle from './MainLayout.less'
+import {theme as muiTheme} from '../utils/MuiTheme'
 
-const muiTheme = getMuiTheme({
-  palette: {
-    primary1Color,
-    primary2Color
-  },
-  fontFamily: ["Microsoft YaHei UI",
-    "Microsoft Yahei",
-    "PingFang SC",
-    "Lantinghei SC",
-    "Hiragino Sans GB",
-    "WenQuanYi Micro Hei",
-    "WenQuanYi Zen Hei",
-    "Noto Sans CJK SC",
-    "Microsoft JhengHei UI",
-    "Microsoft JhengHei",
-    "PingFang TC",
-    "Lantinghei TC",
-    "Noto Sans CJK TC",
-    "Helvetica Neue",
-    "Helvetica",
-  ]
-});
 
-function MainLayout({location,children}) {
+function MainLayout({location,children},context) {
 
   const lableStyle = {fontSize:'20px',color:'white',marginTop:'10px'}
   const navStyle = {
@@ -50,20 +25,30 @@ function MainLayout({location,children}) {
     alignItems:'center',
     color:lableStyle.color,
     fontSize:lableStyle.fontSize-2
-  }
+  };
+
 
   //使得上下文可以访问到
   let getChildContext = function () {
     return {muiTheme};
+  };
+
+  let competitionStyle = {...lableStyle};
+  let activityStyle = {...lableStyle};
+
+  if(location.pathname.startsWith('/competition')){
+    competitionStyle.color=muiTheme.palette.accent1Color
+  }else if(location.pathname.startsWith('/activity')){
+    activityStyle.color=muiTheme.palette.accent1Color
   }
+
 
   const navButtons = (
     <div style={navStyle}>
       <FlatButton
         containerElement={<Link to="/competition"/>}
-        label="竞赛" labelStyle={lableStyle}/>
-      <FlatButton label="动态" labelStyle={lableStyle} style={{paddingRight:'10px'}} />
-
+        label="竞赛" labelStyle={competitionStyle} primary={true}/>
+      <FlatButton label="动态" labelStyle={activityStyle} style={{paddingRight:'10px'}} />
       <Avatar src={getAvatarSrc()}/>
       <FlatButton containerElement={<Link to="/" />}
                   label="Njushenbin"
@@ -80,7 +65,9 @@ function MainLayout({location,children}) {
         <AppBar
           title="扑通"
           iconElementRight={navButtons}
+          showMenuIconButton={false}
         />
+
         <div className={mainLayoutStyle.mainContainer+" row center-xs"}>
           <div className={mainLayoutStyle.notAlignCenter+" col-sm-10 col-lg-8"}>
             {children}

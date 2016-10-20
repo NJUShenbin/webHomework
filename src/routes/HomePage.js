@@ -9,7 +9,7 @@ import Run from 'material-ui/svg-icons/maps/directions-run'
 import Burn from 'material-ui/svg-icons/social/whatshot'
 import Flag from 'material-ui/svg-icons/image/assistant-photo'
 
-import {green200 as RunIconBackground} from 'material-ui/styles/colors'
+import {orange200 as RunIconBackground} from 'material-ui/styles/colors'
 import {List,ListItem} from 'material-ui/List'
 
 import SportGoalChart from '../components/SportGoalChart'
@@ -47,7 +47,7 @@ function HomePage({children,location}) {
         </Paper>
       </div>
 
-      <div className={homePageStyle.alignLeft+" col-lg-8 col-xs-12"}>
+      <div className={homePageStyle.alignLeft+" col-lg-8 col-xs-12"} style={{marginTop:'10px'}}>
         <Paper className={homePageStyle.paper}>
           <h1>自从加入扑通以来</h1>
           <div className="row around-xs" style={{textAlign:'center'}}>

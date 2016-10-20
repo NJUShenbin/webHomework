@@ -1,17 +1,17 @@
 import React,{PropTypes}from 'react';
 import ReactEcharts from 'echarts-for-react';
 
-function SleepGoalChart({totalDay=7,achieveDay}) {
+function JoinPeopleChart({totalPeople,joinPeople}) {
 
   let option ={
     tooltip: {
       trigger: 'item',
-      formatter: "{a} <br/>{b}: {c} ({d}%)"
+      formatter: "{b}: {c} "
     },
 
     series: [
       {
-        name:'睡眠情况',
+        name:'参加人数',
         type:'pie',
         radius: ['50%', '70%'],
         height:200,
@@ -36,19 +36,19 @@ function SleepGoalChart({totalDay=7,achieveDay}) {
           }
         },
         data:[
-          {value:achieveDay,
-            name:'睡眠充足',
+          {value:joinPeople,
+            name:'已参加',
             itemStyle: {
               normal: {
-                color: '#FFCA28'
+                color: 'rgb(111,196,220)'
               }
             }
           },
-          {value:totalDay-achieveDay,
-            name:'睡眠不足',
+          {value:totalPeople-joinPeople,
+            name:'空缺',
             itemStyle: {
               normal: {
-                color: 'rgb(233,143,111)'
+                color: 'rgb(223,223,223)'
               }
             }
           },
@@ -58,16 +58,15 @@ function SleepGoalChart({totalDay=7,achieveDay}) {
   };
   return (
     <ReactEcharts
-      style={{height:'150px'}}
+      style={{height:'80px'}}
       option={option}
     />
   );
 }
 
-SleepGoalChart.propTypes={
-  totalDay: PropTypes.number,
-  achieveDay: PropTypes.number.isRequired
-}
+JoinPeopleChart.propTypes={
+  totalPeople: PropTypes.number.isRequired,
+  joinPeople: PropTypes.number.isRequired
+};
 
-
-export default SleepGoalChart;
+export default JoinPeopleChart;

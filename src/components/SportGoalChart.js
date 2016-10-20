@@ -2,7 +2,7 @@ import React,{PropTypes}from 'react';
 import ReactEcharts from 'echarts-for-react';
 
 function SportGoalChart({totalDay=7,achieveDay},context) {
-  const primary1Color = context.muiTheme.palette.primary1Color
+  const primary1Color = context.muiTheme.palette.primary1Color;
 
   let option ={
     tooltip: {
@@ -18,6 +18,7 @@ function SportGoalChart({totalDay=7,achieveDay},context) {
         height:200,
         left:10,
         avoidLabelOverlap: false,
+
         label: {
           normal: {
             show: false,

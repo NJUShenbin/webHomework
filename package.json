@@ -4,6 +4,7 @@
     "index": "./src/index.js"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "dva": "^1.1.0",
     "echarts-for-react": "^1.1.5",
     "flexboxgrid": "^6.3.1",
