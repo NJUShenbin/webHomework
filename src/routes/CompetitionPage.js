@@ -9,10 +9,12 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 // import F  from 'material-ui/'
 import FontIcon from 'material-ui/FontIcon';
+import RaisedButton from 'material-ui/RaisedButton';
 import AccountBalance from 'material-ui/svg-icons/action/account-balance'
 import DirectionsWalk from 'material-ui/svg-icons/maps/directions-walk'
 import SocialPerson from 'material-ui/svg-icons/social/person'
 import SocialPeople from 'material-ui/svg-icons/social/people'
+import Add from 'material-ui/svg-icons/content/add'
 
 function CompetitionPage({competition,children},context) {
 
@@ -42,6 +44,7 @@ function CompetitionPage({competition,children},context) {
   return(
     <div className="row center-md" style={{textAlign:'left'}}>
       <div>
+
         <Paper style={{marginTop:'10px'}}>
 
           <Menu >
@@ -50,6 +53,14 @@ function CompetitionPage({competition,children},context) {
             })}
           </Menu>
         </Paper>
+
+        <RaisedButton label="创建竞赛"
+                      labelStyle={{color:'black',fontSize:'16px'}}
+                      secondary={true}
+                      style={{width:'100%',marginTop:'10px'}}
+                      icon={<Add />}
+        />
+
       </div>
 
 

@@ -4,6 +4,7 @@ import MainLayout from './routes/MainLayout'
 import HomePage from './routes/HomePage'
 import CompetitionPage from './routes/CompetitionPage'
 import CompetitionList from './routes/CompetitionList'
+import ActivityPage from './routes/ActivityPage'
 
 export default function({ history }) {
   return (
@@ -13,6 +14,7 @@ export default function({ history }) {
         <Route path="/competition" component={CompetitionPage}>
           <IndexRoute component={CompetitionList}/>
         </Route>
+        <Route path="/activity" component={ActivityPage} />
       </Route>
     </Router>
   );

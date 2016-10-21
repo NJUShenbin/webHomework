@@ -4,7 +4,7 @@ import {orange300
 
   as primary1Color,
   teal500 as primary2Color,
-  lightBlue100 as accent1Color,
+  lightBlue200 as accent1Color,
 }from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({

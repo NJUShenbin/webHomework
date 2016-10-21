@@ -36,7 +36,7 @@ function MainLayout({location,children},context) {
   let competitionStyle = {...lableStyle};
   let activityStyle = {...lableStyle};
 
-  const checkedColor = '#B3E5FC';
+  const checkedColor = '#E1F5FE';
 
   if(location.pathname.startsWith('/competition')){
     competitionStyle.color=checkedColor
@@ -50,7 +50,11 @@ function MainLayout({location,children},context) {
       <FlatButton
         containerElement={<Link to="/competition"/>}
         label="竞赛" labelStyle={competitionStyle} primary={true}/>
-      <FlatButton label="动态" labelStyle={activityStyle} style={{paddingRight:'10px'}} />
+
+      <FlatButton
+        containerElement={<Link to="/activity"/>}
+        label="动态" labelStyle={activityStyle} style={{marginRight:'10px'}} />
+
       <Avatar src={getAvatarSrc()}/>
       <FlatButton containerElement={<Link to="/" />}
                   label="Njushenbin"
