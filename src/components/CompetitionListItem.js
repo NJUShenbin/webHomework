@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react'
 
 import Paper from 'material-ui/Paper';
-import {teal200 as personColor} from 'material-ui/styles/colors'
+import {orange200 as personColor} from 'material-ui/styles/colors'
 import AccountBalance from 'material-ui/svg-icons/action/account-balance'
 import Grade from 'material-ui/svg-icons/action/grade'
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,7 +21,7 @@ function CompetitionListItem({competitionInfo}) {
 
   const iconProp = {
       color:'white',
-      style:{width:'50px',height:'50px',padding:'20%'}
+      style:{width:'50px',height:'50px'}
   };
   const iconMap = {
     people: <SocialPeople {...iconProp}/>,

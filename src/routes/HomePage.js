@@ -9,7 +9,7 @@ import Run from 'material-ui/svg-icons/maps/directions-run'
 import Burn from 'material-ui/svg-icons/social/whatshot'
 import Flag from 'material-ui/svg-icons/image/assistant-photo'
 
-import {orange200 as RunIconBackground} from 'material-ui/styles/colors'
+import {orange300 as RunIconBackground} from 'material-ui/styles/colors'
 import {List,ListItem} from 'material-ui/List'
 
 import SportGoalChart from '../components/SportGoalChart'

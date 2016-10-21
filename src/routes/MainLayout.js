@@ -36,10 +36,12 @@ function MainLayout({location,children},context) {
   let competitionStyle = {...lableStyle};
   let activityStyle = {...lableStyle};
 
+  const checkedColor = '#B3E5FC';
+
   if(location.pathname.startsWith('/competition')){
-    competitionStyle.color=muiTheme.palette.accent1Color
+    competitionStyle.color=checkedColor
   }else if(location.pathname.startsWith('/activity')){
-    activityStyle.color=muiTheme.palette.accent1Color
+    activityStyle.color=checkedColor
   }
 
 

@@ -40,7 +40,7 @@ function SleepGoalChart({totalDay=7,achieveDay}) {
             name:'睡眠充足',
             itemStyle: {
               normal: {
-                color: '#FFCA28'
+                color: '#FFB74D'
               }
             }
           },
@@ -48,7 +48,7 @@ function SleepGoalChart({totalDay=7,achieveDay}) {
             name:'睡眠不足',
             itemStyle: {
               normal: {
-                color: 'rgb(233,143,111)'
+                color: '#8D6E63'
               }
             }
           },
