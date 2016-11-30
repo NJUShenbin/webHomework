@@ -11,10 +11,11 @@ const app = dva();
 //app.use({});
 
 // 3. Model
-//app.model(require('./models/example'));
-app.model(require('./models/SleepModel'));
-app.model(require('./models/CompetitionModel'));
-app.model(require('./models/ActivityModel'));
+const reqContext = require.context('./models', true, /^\.\/.*\.js$/);
+reqContext.keys().forEach((key) => {
+  app.model(reqContext(key));
+});
+
 
 // 4. Router
 app.router(require('./router'));

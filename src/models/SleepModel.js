@@ -15,9 +15,9 @@ export default {
     setup({ dispatch, history }) {
       history.listen(location => {
         if (location.pathname === '/') {
-          dispatch({
-            type: 'fetchSleepData',
-          });
+          // dispatch({
+          //   type: 'fetchSleepData',
+          // });
         }
       });
     },

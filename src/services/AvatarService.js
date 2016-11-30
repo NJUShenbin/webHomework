@@ -1,3 +1,3 @@
 export default function getAvatarSrc() {
-  return 'http://uupaper.oss-cn-qingdao.aliyuncs.com/1d3ffa6b6a8a8d52570ed953f880e03d.jpeg'
+  return 'http://115.159.41.136/img/2015061914565043612.jpeg'
 }

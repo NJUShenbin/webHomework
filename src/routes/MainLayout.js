@@ -1,5 +1,6 @@
 import React, {PropTypes} from "react"
 import { Link } from 'dva/router';
+import { connect } from 'dva';
 
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
@@ -10,14 +11,16 @@ import Paper from 'material-ui/Paper'
 import Avatar from 'material-ui/Avatar'
 import Flex from 'flexboxgrid'
 
+import VCenterDiv from '../components/VCenterDiv/VCenterDiv';
+
 import getAvatarSrc from '../services/AvatarService'
 import mainLayoutStyle from './MainLayout.less'
 import {theme as muiTheme} from '../utils/MuiTheme'
 
 
-function MainLayout({location,children},context) {
+function MainLayout({location,children,login,history},context) {
 
-  const lableStyle = {fontSize:'20px',color:'white',marginTop:'10px'}
+  const lableStyle = {fontSize:'20px',color:'white',marginTop:'10px'};
   const navStyle = {
     paddingTop:'4px',
     paddingRight:'15px',
@@ -65,24 +68,37 @@ function MainLayout({location,children},context) {
 
   );
 
+  let content = (<div >
+    <AppBar
+      title="扑通"
+      iconElementRight={navButtons}
+      showMenuIconButton={false}
+    />
+
+    <div className={mainLayoutStyle.mainContainer+" row center-xs"}>
+      <div className={mainLayoutStyle.notAlignCenter+" col-sm-10 col-lg-8"}>
+        {children}
+      </div>
+    </div>
+  </div>);
+
+  if(login.user==null){
+    content = (
+    <div className={mainLayoutStyle.mainContainer+" row center-xs"}
+      style={{height:'100%'}}>
+      <div className={mainLayoutStyle.notAlignCenter+" col-sm-10 col-lg-4 "}>
+          <VCenterDiv style={{height:'80%'}}>
+            {children}
+          </VCenterDiv>
+      </div>
+    </div>);
+
+  }
+
+
   return(
     <MuiThemeProvider muiTheme={muiTheme}>
-      <div >
-        <AppBar
-          title="扑通"
-          iconElementRight={navButtons}
-          showMenuIconButton={false}
-        />
-
-        <div className={mainLayoutStyle.mainContainer+" row center-xs"}>
-          <div className={mainLayoutStyle.notAlignCenter+" col-sm-10 col-lg-8"}>
-            {children}
-          </div>
-
-        </div>
-      </div>
-
-
+      {content}
     </MuiThemeProvider>
   )
 }
@@ -92,4 +108,9 @@ MainLayout.propTypes = {
   location: PropTypes.object,
 };
 
-export default MainLayout
+
+function mapStateToProps({ login }){
+  return { login };
+}
+
+export default connect(mapStateToProps)(MainLayout);

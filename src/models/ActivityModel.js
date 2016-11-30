@@ -10,7 +10,9 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
-        dispatch({type:'fetchAll'})
+        if(location.pathname === '/activity'){
+          dispatch({type:'fetchAll'})
+        }
       });
     },
   },
