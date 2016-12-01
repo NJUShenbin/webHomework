@@ -15,27 +15,17 @@ import DirectionsWalk from 'material-ui/svg-icons/maps/directions-walk'
 import SocialPerson from 'material-ui/svg-icons/social/person'
 import SocialPeople from 'material-ui/svg-icons/social/people'
 import Add from 'material-ui/svg-icons/content/add'
+import Dialog from 'material-ui/Dialog';
 
-function CompetitionPage({competition,children},context) {
+import CreateCompetitionDialog from '../components/CreateCompetitionDialog';
+
+function CompetitionPage({competition,children,dispatch},context) {
 
   let menuItemList = [
     { primaryText:'竞技场',
       leftIcon : <AccountBalance/>,
       containerElement : <Link to="/competition"/>
     },
-    { primaryText:'我的竞赛',
-      leftIcon : <DirectionsWalk/>,
-      containerElement : <Link to="/competition/mine"/>
-    },
-    { primaryText:'单人竞赛',
-      leftIcon : <SocialPerson/>,
-      containerElement : <Link to="/competition/person"/>
-    },
-    { primaryText:'团队竞赛',
-      leftIcon : <SocialPeople/>,
-      containerElement : <Link to="/competition/people"/>
-    },
-
   ];
 
   menuItemList[competition.checked].style =
@@ -44,12 +34,11 @@ function CompetitionPage({competition,children},context) {
   return(
     <div className="row center-md" style={{textAlign:'left'}}>
       <div>
-
         <Paper style={{marginTop:'10px'}}>
 
           <Menu >
             {menuItemList.map((currentValue,index)=>{
-              return ( <MenuItem {...currentValue}/> )
+              return ( <MenuItem key={index} {...currentValue}/> )
             })}
           </Menu>
         </Paper>
@@ -59,6 +48,11 @@ function CompetitionPage({competition,children},context) {
                       secondary={true}
                       style={{width:'100%',marginTop:'10px'}}
                       icon={<Add />}
+                      onClick={()=>{
+                        dispatch({
+                          type:'competition/openDialog',
+                        });
+                      }}
         />
 
       </div>
@@ -67,6 +61,8 @@ function CompetitionPage({competition,children},context) {
       <div className="col-md-9" style={{marginTop:'10px'}}>
           {children}
       </div>
+
+      <CreateCompetitionDialog/>
 
     </div>
   )

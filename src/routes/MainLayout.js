@@ -13,7 +13,7 @@ import Flex from 'flexboxgrid'
 
 import VCenterDiv from '../components/VCenterDiv/VCenterDiv';
 
-import getAvatarSrc from '../services/AvatarService'
+import ResourceService from '../services/ResourceService'
 import mainLayoutStyle from './MainLayout.less'
 import {theme as muiTheme} from '../utils/MuiTheme'
 
@@ -27,7 +27,6 @@ function MainLayout({location,children,login,history},context) {
     display:'flex',
     alignItems:'center',
     color:lableStyle.color,
-    fontSize:lableStyle.fontSize-2
   };
 
 
@@ -58,10 +57,10 @@ function MainLayout({location,children,login,history},context) {
         containerElement={<Link to="/activity"/>}
         label="动态" labelStyle={activityStyle} style={{marginRight:'10px'}} />
 
-      <Avatar src={getAvatarSrc()}/>
+      <Avatar src={ResourceService.getAvatarSrc('avatar1')}/>
       <FlatButton containerElement={<Link to="/" />}
                   label="Njushenbin"
-                  labelStyle={{textTransform:'none',...lableStyle,fontSize:lableStyle.fontSize-2,paddingLeft:'5px'}}>
+                  labelStyle={{textTransform:'none',...lableStyle,paddingLeft:'5px'}}>
 
       </FlatButton>
     </div>
@@ -82,7 +81,7 @@ function MainLayout({location,children,login,history},context) {
     </div>
   </div>);
 
-  if(login.user==null){
+  if(location.pathname == "/login"){
     content = (
     <div className={mainLayoutStyle.mainContainer+" row center-xs"}
       style={{height:'100%'}}>

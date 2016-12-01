@@ -1,4 +1,5 @@
 import fetch from 'dva/fetch';
+import Config from '../config/Config'
 
 function parseJSON(response) {
   return response.json();
@@ -22,9 +23,16 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  return fetch(url, options)
+
+  if(options != null){
+    options['headers'] ={
+      'Content-Type': 'application/json'
+    };
+  }
+
+  return fetch(Config.baseUrl+url, options)
     .then(checkStatus)
     .then(parseJSON)
-    .then((data) => ({ data }))
+    .then((data) => data)
     .catch((err) => ({ err }));
 }

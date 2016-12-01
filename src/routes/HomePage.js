@@ -17,9 +17,10 @@ import SleepGoalChart from '../components/SleepGoalChart'
 import HealthValueChart from '../components/HealthValueChart'
 import SleepLineChart from '../components/SleepLineChart'
 import SportHeatChart from '../components/SportHeatChart'
+import WatchingList from '../components/WatchingList';
 
 
-import getAvatarSrc from '../services/AvatarService'
+import ResourceService from '../services/ResourceService'
 
 
 
@@ -33,11 +34,12 @@ const avatarStyle = {
 const iconSize = 100;
 
 function HomePage({children,location}) {
+
   return(
     <div className={homePageStyle.homePage+" row"}>
       <div className="col-lg-4 col-xs-12">
         <Paper className={homePageStyle.paper}>
-          <Avatar style={avatarStyle} src={getAvatarSrc()} size={200}/>
+          <Avatar style={avatarStyle} src={ResourceService.getAvatarSrc('avatar1')} size={200}/>
           <span className={homePageStyle.username}> Njushenbin </span>
           <Divider style={{marginTop:'10px'}}/>
           <List className={homePageStyle.alignLeft}>
@@ -45,6 +47,7 @@ function HomePage({children,location}) {
             <ListItem primaryText="南京" secondaryText="所在地" leftIcon={<Grade />} />
           </List>
         </Paper>
+        <WatchingList/>
       </div>
 
       <div className={homePageStyle.alignLeft+" col-lg-8 col-xs-12"} style={{marginTop:'10px'}}>

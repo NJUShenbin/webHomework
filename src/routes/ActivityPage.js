@@ -7,7 +7,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 import Thumb from 'material-ui/svg-icons/action/thumb-up';
 
-import getAvatarSrc from '../services/AvatarService'
+import ResourceService from '../services/ResourceService'
 
 function ActivityPage({activity,location,dispatch}) {
 
@@ -37,7 +37,7 @@ function ActivityPage({activity,location,dispatch}) {
         <CardHeader
           title="NjuShenbin"
           subtitle="2016-10-21"
-          avatar={getAvatarSrc()}
+          avatar={ResourceService.getAvatarSrc('avatar1')}
           titleStyle={{fontSize:'18px'}}
         />
         <CardText style={{fontSize:'16px'}}>

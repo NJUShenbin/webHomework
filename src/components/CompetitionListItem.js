@@ -1,4 +1,5 @@
-import React,{PropTypes} from 'react'
+import React,{PropTypes} from 'react';
+import { connect } from 'dva';
 
 import Paper from 'material-ui/Paper';
 import {orange200 as personColor} from 'material-ui/styles/colors'
@@ -14,10 +15,11 @@ import styles from '../routes/CompetitionList.less'
 import {primaryColor as iconColor} from '../utils/MuiTheme'
 import JoinPeopleChart from '../components/JoinPeopleChart'
 
-function CompetitionListItem({competitionInfo}) {
+function CompetitionListItem({competitionInfo,dispatch}) {
 
 
-  let {name,type,totalPeople,joinPeople,startDate,endDate,score} = competitionInfo;
+  let {name,type,totalPeople,joinPeople,startDate,endDate,score,canDelete,id}
+    = competitionInfo;
 
   const iconProp = {
       color:'white',
@@ -27,6 +29,40 @@ function CompetitionListItem({competitionInfo}) {
     people: <SocialPeople {...iconProp}/>,
     person: <SocialPerson {...iconProp}/>,
   };
+
+  let actionButton = [
+    <div className="row" style={{marginRight:'30px'}}>
+      <RaisedButton
+        secondary={true}
+        labelStyle={{color:'black'}}
+        onClick={()=>{
+          dispatch({
+            type:'competition/takePartInCompetition',
+            payload:{
+              id:id,
+            }
+          })
+        }}
+        label="加入" />
+    </div>,
+  ];
+
+  if(canDelete){
+    actionButton.push(<div className="row">
+      <RaisedButton
+        labelStyle={{color:'black',width:'30px'}}
+        label="删除"
+        onClick = {()=>{
+          dispatch({
+            type:'competition/deleteCompetition',
+            payload : {
+              id : id
+            }
+          });
+        }}
+      />
+    </div>);
+  }
 
   const icon = iconMap[type];
 
@@ -61,8 +97,8 @@ function CompetitionListItem({competitionInfo}) {
             {`参与人数${joinPeople}/${totalPeople}`}
           </div>
 
-          <div className={styles.competitionType+' col-xs-3'}>
-            <RaisedButton secondary={true} labelStyle={{color:'black'}} label="加入" />
+          <div className={styles.competitionType+' col-xs-10'}>
+            {actionButton}
           </div>
 
         </div>
@@ -76,4 +112,6 @@ CompetitionListItem.propTypes = {
   competitionInfo : PropTypes.object.isRequired
 };
 
-export default CompetitionListItem;
+
+
+export default connect()(CompetitionListItem);

@@ -41,5 +41,6 @@ module.exports = function(webpackConfig, env) {
 
   webpackConfig.plugins.push(new OpenBrowserPlugin({ url: 'http://localhost:8989' }));
 
+
   return webpackConfig;
 };
