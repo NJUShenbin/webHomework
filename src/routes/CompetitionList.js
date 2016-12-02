@@ -7,19 +7,20 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import Divider from 'material-ui/Divider';
 import ActionInfo from 'material-ui/svg-icons/action/info';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import CompetitionListItem from '../components/CompetitionListItem'
 import styles from './CompetitionList.less'
 
 import { connect } from 'dva'
 
-function CompetitionList({location,competition}) {
+function CompetitionList({location,competition,dispatch}) {
 
   let list = competition.competitionList;
   return(
     <Paper className={styles.container} zDepth={0}>
       {list.map((currentValue,index)=>{
-        return <CompetitionListItem competitionInfo={currentValue} />
+        return <CompetitionListItem key={currentValue.id} competitionInfo={currentValue} />
       })}
     </Paper>
 

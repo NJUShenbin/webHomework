@@ -13,9 +13,7 @@ export default function({ history }) {
       <Route path="/" component={MainLayout}>
         <IndexRoute component={HomePage}/>
         <Route path="/login" component={LoginPage}/>
-        <Route path="/competition" component={CompetitionPage}>
-          <IndexRoute component={CompetitionList}/>
-        </Route>
+        <Route path="/competition" component={CompetitionPage}/>
         <Route path="/activity" component={ActivityPage} />
       </Route>
     </Router>

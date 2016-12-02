@@ -1,5 +1,7 @@
 import UserService from '../services/UserService';
 import merge from '../utils/MergeStateAction'
+import update from 'react-addons-update';
+import delay from '../utils/delay';
 
 export default {
 
@@ -7,6 +9,7 @@ export default {
 
   state: {
     watchingUsers : [],
+    addWatchingSuccess : null,
   },
 
   subscriptions: {
@@ -37,6 +40,22 @@ export default {
           }
         })
       }
+    },
+
+    *addWatching({ payload }, { call, put ,select}){
+        const user = yield UserService.getUser(payload.username);
+        if(user.err){
+          console.log(user.err);
+          yield put({
+            type : 'addWatchingFail',
+          });
+        }else{
+          yield put({
+            type : 'addWatchingSuccess',
+            payload : user,
+          });
+        }
+
     }
 
   },
@@ -48,7 +67,17 @@ export default {
 
     setState(state,action){
       return merge(state,action);
-    }
+    },
+
+    addWatchingSuccess(state,action){
+      let watchingUsers = update(state.watchingUsers,{$push:[action.payload]});
+      return {...state,watchingUsers,addWatchingSuccess:true};
+    },
+
+    addWatchingFail(state,action){
+      return {...state,addWatchingSuccess:false}
+    },
+
   },
 
 }

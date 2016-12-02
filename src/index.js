@@ -3,6 +3,10 @@ import './index.less';
 import dva from 'dva';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import { useRouterHistory } from 'dva/router';
+import { createHashHistory } from 'history';
+import { browserHistory } from 'dva/router';
+
 injectTapEventPlugin();
 // 1. Initialize
 const app = dva();

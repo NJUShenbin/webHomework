@@ -2,7 +2,8 @@ import React, {PropTypes} from "react"
 import { Link } from 'dva/router';
 import { connect } from 'dva';
 
-import CompetitionStyle from './CompetitionPage.less'
+import CompetitionStyle from './CompetitionPage.less';
+import {theme as muiTheme} from '../utils/MuiTheme'
 
 import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
@@ -17,10 +18,11 @@ import SocialPeople from 'material-ui/svg-icons/social/people'
 import Add from 'material-ui/svg-icons/content/add'
 import Dialog from 'material-ui/Dialog';
 
+import CompetitionList from './CompetitionList';
 import CreateCompetitionDialog from '../components/CreateCompetitionDialog';
 
-function CompetitionPage({competition,children,dispatch},context) {
-
+// function CompetitionPage({competition,children,dispatch},context) {
+function CompetitionPage({children,dispatch}) {
   let menuItemList = [
     { primaryText:'竞技场',
       leftIcon : <AccountBalance/>,
@@ -28,8 +30,6 @@ function CompetitionPage({competition,children,dispatch},context) {
     },
   ];
 
-  menuItemList[competition.checked].style =
-    {backgroundColor:context.muiTheme.palette.borderColor};
 
   return(
     <div className="row center-md" style={{textAlign:'left'}}>
@@ -51,6 +51,9 @@ function CompetitionPage({competition,children,dispatch},context) {
                       onClick={()=>{
                         dispatch({
                           type:'competition/openDialog',
+                          payload : {
+                            dialogType : 'competition/createCompetition'
+                          }
                         });
                       }}
         />
@@ -59,7 +62,7 @@ function CompetitionPage({competition,children,dispatch},context) {
 
 
       <div className="col-md-9" style={{marginTop:'10px'}}>
-          {children}
+          <CompetitionList/>
       </div>
 
       <CreateCompetitionDialog/>
@@ -68,10 +71,4 @@ function CompetitionPage({competition,children,dispatch},context) {
   )
 }
 
-CompetitionPage.contextTypes = {muiTheme: React.PropTypes.object};
-
-function mapStateToProps({ competition }){
-  return { competition };
-}
-
-export default connect(mapStateToProps)(CompetitionPage);
+export default connect()(CompetitionPage);

@@ -10,7 +10,7 @@ export default {
     checked:0,
     competitionList : (function () {
       let competitionList=[];
-      for (let i=0;i<15;i++){
+      for (let i=0;i<5;i++){
         competitionList.push({
           id:i,
           name:'南大马拉松竞赛',
@@ -20,7 +20,8 @@ export default {
           startDate : '2016-10-10',
           endDate : '2016-10-25',
           score : 10,
-          canDelete : false
+          canDelete : false,
+          canJoin : true,
         });
       }
       return competitionList;
@@ -28,35 +29,12 @@ export default {
 
     myCompetitionList : [],
     dialogOpen : false,
+    dialogType : '',
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
-      history.listen(location => {
 
-        let pathMap={};
-        pathMap['/competition'] = {
-          checked:0,
-          otherAction : {
-            type : 'fetchRemote'
-          }
-        };
-        pathMap['/competition/mine'] = {
-          checked:1,
-          otherAction:{
-            type : 'fetchMyList'
-          }
-        };
-
-        if(pathMap[location.pathname]){
-          dispatch({
-            type:'check',
-            payload:{checked:pathMap[location.pathname].checked}
-          });
-
-          dispatch(pathMap[location.pathname].otherAction);
-        }
-      });
     },
   },
 
@@ -84,15 +62,28 @@ export default {
       newCompetition.canDelete = true;
       newCompetition.id = state.competitionList.length+1;
       newCompetition.joinPeople = 1;
+      newCompetition.canJoin = false;
       state.competitionList = update(state.competitionList, {$unshift: [newCompetition]});
       state.dialogOpen = false;
-      console.log(state);
+      return {...state};
+    },
+
+    editCompetition(state,action){
+      let newCompetition = action.payload;
+      console.log(newCompetition);
+      for (let i = 0; i < state.competitionList.length; i++) {
+        const old = state.competitionList[i];
+        if (old.id == newCompetition.id) {
+          state.competitionList[i] = {...old, ...newCompetition};
+          break;
+        }
+      }
+      state.dialogOpen = false;
+
       return {...state};
     },
 
     deleteCompetition(state,action){
-
-      console.log("delete");
 
       const id = action.payload.id;
       let index = 0;
@@ -117,16 +108,19 @@ export default {
         }
       }
 
-      const competitionList = update(state.competitionList,{ [index] :{joinPeople:
-        {$apply : function(joinPeople) {return joinPeople+1;}}
-      }});
-
+      const competitionList = update(state.competitionList,
+        {
+          [index] :{
+            joinPeople: {$apply : function(joinPeople) {return joinPeople+1;}},
+            canJoin:{$set : false},
+          }
+        });
       return {...state,competitionList};
 
     },
 
     openDialog(state,action){
-      return {...state,dialogOpen:true}
+      return {...state,dialogOpen:true,...action.payload};
     },
 
     closeDialog(state,action){

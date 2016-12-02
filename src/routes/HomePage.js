@@ -1,9 +1,12 @@
 import React, {PropTypes} from "react"
+import { connect } from 'dva';
+
 import homePageStyle from './HomePage.less'
 import Paper from 'material-ui/Paper'
 import Avatar from 'material-ui/Avatar'
 import Divider from 'material-ui/Divider';
 import Grade from 'material-ui/svg-icons/action/grade'
+import RaisedButton from 'material-ui/RaisedButton';
 
 import Run from 'material-ui/svg-icons/maps/directions-run'
 import Burn from 'material-ui/svg-icons/social/whatshot'
@@ -33,7 +36,7 @@ const avatarStyle = {
 };
 const iconSize = 100;
 
-function HomePage({children,location}) {
+function HomePage({children,location,dispatch}) {
 
   return(
     <div className={homePageStyle.homePage+" row"}>
@@ -56,15 +59,15 @@ function HomePage({children,location}) {
           <div className="row around-xs" style={{textAlign:'center'}}>
             <div className="col-lg-3" >
               <Avatar style={avatarStyle} backgroundColor={RunIconBackground} icon={<Run/>} size={iconSize}/>
-              <p>已运动10天</p>
+              <p>已运动15天</p>
             </div>
             <div className="col-lg-3">
               <Avatar style={avatarStyle} backgroundColor={RunIconBackground} icon={<Burn/>} size={iconSize}/>
-              <p>共燃烧1000大卡</p>
+              <p>共燃烧2345.6大卡</p>
             </div>
             <div className="col-lg-3">
               <Avatar style={avatarStyle} backgroundColor={RunIconBackground} icon={<Flag/>} size={iconSize}/>
-              <p>累计里程10公里</p>
+              <p>累计里程3.4公里</p>
             </div>
           </div>
         </Paper>
@@ -98,9 +101,10 @@ function HomePage({children,location}) {
           <SportHeatChart/>
         </Paper>
 
+
       </div>
     </div>
   );
 }
 
-export default HomePage;
+export default connect()(HomePage);

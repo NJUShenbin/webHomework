@@ -17,7 +17,7 @@ export default {
     setup({ dispatch, history }) {
       history.listen(location => {
         if(location.pathname!=='/login'){
-          dispatch({type:'loginConfirm'})
+          // dispatch({type:'loginConfirm'})
         }
       });
     },

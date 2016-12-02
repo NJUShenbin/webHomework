@@ -12,15 +12,28 @@ import DialogStyle from './CompetitionDialog.less';
 
 class CreateCompetitionDialog extends Component {
 
-  state = {
-    name: null,
-    type:null,
-    totalPeople : 0,
-    joinPeople : 0,
-    startDate : '2016-10-10',
-    endDate : '2016-10-25',
-    score : 0,
+  constructor(props) {
+    super(props);
+    console.log("construct!");
+    if(this.props.competition.competitionInfo!=null){
+      this.state = this.props.competition.competitionInfo;
+
+    }else{
+      this.state = {
+        name: null,
+        type:null,
+        totalPeople : 5,
+        joinPeople : 1,
+        startDate : '2016-10-10',
+        endDate : '2016-10-25',
+        score : 10,
+      };
+    }
+
+    console.log(this.state);
+
   };
+
 
   changeName = (e) => this.setState({name:e.target.value});
   changeType = (event, index, value) => this.setState({type:value});
@@ -30,16 +43,29 @@ class CreateCompetitionDialog extends Component {
 
   render() {
 
+    const titleMap = {
+      'competition/createCompetition' : '创建比赛',
+      'competition/editCompetition' : '编辑比赛'
+    };
+
+    const dialogType = this.props.competition.dialogType;
+
     let actions=[
 
       <FlatButton
         label="Submit"
         primary={true}
-        onTouchTap={()=>{this.props.dispatch({
-          type : 'competition/createCompetition',
-          payload:{
-            ...this.state
+        onTouchTap={()=>{
+          let payload = {...this.state};
+          if(this.props.competition.competitionInfo!=null){
+            payload = {...this.props.competition.competitionInfo,
+              ...payload
+            };
           }
+
+          this.props.dispatch({
+          type : dialogType,
+          payload:payload
         })}}
       />,
 
@@ -51,7 +77,7 @@ class CreateCompetitionDialog extends Component {
 
     return(
     <Dialog
-      title="创建竞赛"
+      title={titleMap[dialogType]}
       modal={false}
       actions={actions}
       open={this.props.competition.dialogOpen}
@@ -62,6 +88,7 @@ class CreateCompetitionDialog extends Component {
 
         <TextField
           floatingLabelText="比赛名称"
+          value={this.state.name}
           onChange={this.changeName}
         />
 
@@ -78,11 +105,13 @@ class CreateCompetitionDialog extends Component {
 
       <div className={DialogStyle.dialog+" row center-lg"}>
         <TextField
+          value={this.state.totalPeople}
           floatingLabelText="比赛人数"
           type="number"
           onChange={this.changePeople}
         />
         <TextField
+          value={this.state.score}
           floatingLabelText="比赛积分"
           type="number"
           onChange={this.changeScore}

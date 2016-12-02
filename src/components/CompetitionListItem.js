@@ -18,7 +18,7 @@ import JoinPeopleChart from '../components/JoinPeopleChart'
 function CompetitionListItem({competitionInfo,dispatch}) {
 
 
-  let {name,type,totalPeople,joinPeople,startDate,endDate,score,canDelete,id}
+  let {name,type,totalPeople,joinPeople,startDate,endDate,score,canDelete,id,canJoin}
     = competitionInfo;
 
   const iconProp = {
@@ -30,25 +30,31 @@ function CompetitionListItem({competitionInfo,dispatch}) {
     person: <SocialPerson {...iconProp}/>,
   };
 
+  let joinProps = {secondary:true,label:'加入'};
+  if(!canJoin){
+    joinProps.disabled = true;
+    joinProps.label = '已加入';
+  }
+
   let actionButton = [
-    <div className="row" style={{marginRight:'30px'}}>
+    <div key="join" className="row" style={{marginRight:'30px'}}>
       <RaisedButton
-        secondary={true}
+        {...joinProps}
         labelStyle={{color:'black'}}
-        onClick={()=>{
+        onClick={() =>{
           dispatch({
             type:'competition/takePartInCompetition',
             payload:{
               id:id,
             }
-          })
+          });
         }}
-        label="加入" />
+         />
     </div>,
   ];
 
   if(canDelete){
-    actionButton.push(<div className="row">
+    actionButton.push(<div key="div" className="row" style={{marginRight:'30px'}}>
       <RaisedButton
         labelStyle={{color:'black',width:'30px'}}
         label="删除"
@@ -62,11 +68,31 @@ function CompetitionListItem({competitionInfo,dispatch}) {
         }}
       />
     </div>);
+
+    actionButton.push(
+      <div key="div2" className="row" style={{marginRight:'30px'}}>
+        <RaisedButton
+                      labelStyle={{color:'black',width:'30px'}}
+                      label="修改"
+                      onClick = {()=>{
+                        dispatch({
+                          type:'competition/openDialog',
+                          payload : {
+                            competitionInfo:competitionInfo,
+                            dialogType : 'competition/editCompetition'
+                          }
+                        });
+                      }}
+        />
+      </div>
+    );
+
   }
 
   const icon = iconMap[type];
 
   return(
+
     <Paper className="row" style={{marginBottom:'10px'}} zDepth={1}>
 
       <div className={styles.competitionType+" col-xs-2"} style={{backgroundColor:personColor}}>
