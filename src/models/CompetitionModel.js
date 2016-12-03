@@ -30,6 +30,7 @@ export default {
     myCompetitionList : [],
     dialogOpen : false,
     dialogType : '',
+    nameInvalid : false,
   },
 
   subscriptions: {
@@ -59,13 +60,21 @@ export default {
 
     createCompetition(state,action){
       let newCompetition = action.payload;
-      newCompetition.canDelete = true;
-      newCompetition.id = state.competitionList.length+1;
-      newCompetition.joinPeople = 1;
-      newCompetition.canJoin = false;
-      state.competitionList = update(state.competitionList, {$unshift: [newCompetition]});
-      state.dialogOpen = false;
-      return {...state};
+
+      if(testCompetitionName(newCompetition.name)){
+        newCompetition.canDelete = true;
+        newCompetition.id = state.competitionList.length+1;
+        newCompetition.joinPeople = 1;
+        newCompetition.canJoin = false;
+        state.competitionList = update(state.competitionList, {$unshift: [newCompetition]});
+        state.dialogOpen = false;
+        state.nameInvalid = false;
+        return {...state};
+      }else{
+        state.nameInvalid = true;
+        return {...state};
+      }
+
     },
 
     editCompetition(state,action){
@@ -127,7 +136,38 @@ export default {
       return {...state,dialogOpen:false}
     },
 
+    allCanDelete(state,action){
+      let newList = [];
+
+      for(let competition of state.competitionList){
+        competition.canDelete = true;
+        newList.push(competition);
+      }
+
+      return {...state,competitionList:newList};
+    },
+
+    onlyAllowCreatorDelete(state,action){
+      let newList = [];
+
+      for(let competition of state.competitionList){
+        if(competition.username != 'NJUShenbin'){
+          competition.canDelete = false;
+
+        }
+        newList.push(competition);
+      }
+
+      return {...state,competitionList:newList};
+    }
+
+
+
   },
 
+}
+
+function testCompetitionName(name) {
+  return /[\w\u4e00-\u9fa5]/.test(name);
 }
 

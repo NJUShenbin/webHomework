@@ -36,7 +36,30 @@ const avatarStyle = {
 };
 const iconSize = 100;
 
-function HomePage({children,location,dispatch}) {
+function HomePage({children,location,dispatch,login}) {
+
+  let adminButton = null;
+  console.log(login);
+  if(login.isAdmin){
+    adminButton = <RaisedButton
+      label="取消管理"
+      style={{
+        marginTop : '20px',
+        width:'100%'
+      }}
+      onClick ={()=>dispatch({type:'login/cancelAdmin'})}
+    />
+  }else{
+    adminButton = <RaisedButton
+      label="进入管理"
+      primary={true}
+       style={{
+         marginTop : '20px',
+         width:'100%'
+       }}
+       onClick ={()=>dispatch({type:'login/becomeAdmin'})}
+     />
+   }
 
   return(
     <div className={homePageStyle.homePage+" row"}>
@@ -51,6 +74,9 @@ function HomePage({children,location,dispatch}) {
           </List>
         </Paper>
         <WatchingList/>
+
+        {adminButton}
+
       </div>
 
       <div className={homePageStyle.alignLeft+" col-lg-8 col-xs-12"} style={{marginTop:'10px'}}>
@@ -107,4 +133,8 @@ function HomePage({children,location,dispatch}) {
   );
 }
 
-export default connect()(HomePage);
+function mapStateToProps({login}) {
+  return {login};
+}
+
+export default connect(mapStateToProps)(HomePage);

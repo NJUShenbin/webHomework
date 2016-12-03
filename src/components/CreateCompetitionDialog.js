@@ -50,6 +50,11 @@ class CreateCompetitionDialog extends Component {
 
     const dialogType = this.props.competition.dialogType;
 
+    let nameTextFieldProp = {};
+    if(this.props.competition.nameInvalid){
+      nameTextFieldProp.errorText = "名称只能由字母、汉字、数字组成"
+    }
+
     let actions=[
 
       <FlatButton
@@ -59,7 +64,8 @@ class CreateCompetitionDialog extends Component {
           let payload = {...this.state};
           if(this.props.competition.competitionInfo!=null){
             payload = {...this.props.competition.competitionInfo,
-              ...payload
+              ...payload,
+              username:'NJUShenbin'
             };
           }
 
@@ -88,6 +94,7 @@ class CreateCompetitionDialog extends Component {
 
         <TextField
           floatingLabelText="比赛名称"
+          {...nameTextFieldProp}
           value={this.state.name}
           onChange={this.changeName}
         />

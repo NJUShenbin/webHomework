@@ -1,6 +1,7 @@
 import { routerRedux } from 'dva/router';
 import merge from '../utils/MergeStateAction'
 import UserService from '../services/UserService';
+import delay from '../utils/delay';
 
 export default {
 
@@ -11,13 +12,14 @@ export default {
     apiToken : null,
     username: null,
     password : null,
+    isAdmin : false,
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
         if(location.pathname!=='/login'){
-          // dispatch({type:'loginConfirm'})
+          dispatch({type:'loginConfirm'})
         }
       });
     },
@@ -51,13 +53,29 @@ export default {
 
         yield put(routerRedux.push('/'));
       }
-    }
+    },
+
+    *becomeAdmin({ payload }, { call, put ,select}){
+      yield call(delay,100);
+      yield put({type:'competition/allCanDelete'});
+      yield put({type:'setState',payload:{isAdmin:true}});
+    },
+
+    *cancelAdmin({ payload }, { call, put ,select}){
+      yield call(delay,100);
+      yield put({type:'competition/onlyAllowCreatorDelete'});
+      yield put({type:'setState',payload:{isAdmin:false}});
+    },
 
   },
 
   reducers: {
     fetch(state, action) {
       return { ...state, ...action.payload };
+    },
+
+    setState(state,action){
+      return merge(state,action);
     },
 
     setUsername(state,action){
